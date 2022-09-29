@@ -36,6 +36,9 @@ class Film
     #[ORM\OneToMany(mappedBy: 'film', targetEntity: FilmCategory::class)]
     private Collection $filmCategories;
 
+    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    private ?\DateTimeInterface $duration = null;
+
     public function __construct()
     {
         $this->attendees = new ArrayCollection();
@@ -151,6 +154,18 @@ class Film
                 $filmCategory->setFilm(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDuration(): ?\DateTimeInterface
+    {
+        return $this->duration;
+    }
+
+    public function setDuration(\DateTimeInterface $duration): self
+    {
+        $this->duration = $duration;
 
         return $this;
     }
