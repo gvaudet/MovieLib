@@ -1,0 +1,78 @@
+
+/* ---------------------------Global------------------------- */
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+header{
+    border: 1px solid black;
+}
+
+main{
+    flex-grow: 1;
+    border: 1px solid violet;
+
+}
+
+footer{
+    border: 1px solid red;
+
+}
+.container{
+    max-width: 1600px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 0 auto;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* -------------- components / header ---------------*/
+
+#logo{
+    font-size: 2em;
+}
+
+#navBar{
+    display: flex;
+}
+
+li a{
+
+    padding: 5px;
+    margin-right: 10px;
+    transition: all 500ms;
+}
+
+/* -------------- components / footer ---------------*/
+
+footer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100px;
+}
+
+.legal{
+text-align: center;
+}
+
+.legal ul{
+    display: flex;
+    margin-top: 20px;
+}
+
+.legal ul li{
+    margin-right: 10px;
+}
+.legal p{
+    margin-top: 20px;
+}
+
+/* -------------- components / footer ---------------*/
+

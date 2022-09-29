@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MainController!{% endblock %}
+
+{% block body %}
+<main>
+    <section>
+        <div class="container">
+            <p>Nombre de films : {{ films| length }}</p>
+            <p>Nombre d'intervenants : {{ people| length }}</p>
+        </div>
+    </section>
+</main>
+{% endblock %}
