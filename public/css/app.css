@@ -5,20 +5,16 @@ body{
     display: flex;
     flex-direction: column;
 }
-header{
-    border: 1px solid black;
+header, footer{
+    background-color: black;
 }
 
 main{
     flex-grow: 1;
     border: 1px solid violet;
-
 }
 
-footer{
-    border: 1px solid red;
 
-}
 .container{
     max-width: 1600px;
     display: flex;
@@ -32,6 +28,9 @@ a {
     text-decoration: none;
 }
 
+.form, .index {
+    margin: 0 auto;
+}
 /* -------------- components / header ---------------*/
 
 #logo{
@@ -49,6 +48,10 @@ li a{
     transition: all 500ms;
 }
 
+header a{
+    color: beige;
+}
+
 /* -------------- components / footer ---------------*/
 
 footer{
@@ -56,8 +59,12 @@ footer{
     flex-direction: column;
     align-items: center;
     height: 100px;
-}
 
+    color: beige;
+}
+footer a{
+    color: beige;
+}
 .legal{
 text-align: center;
 }

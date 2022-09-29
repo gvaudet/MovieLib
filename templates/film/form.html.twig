@@ -6,18 +6,14 @@
 {% block body %}
 <h1>Ajouter un Film </h1>
 
-<main>
+<main class="form">
 
-<div class="form-container">
-{{ form_start(form) }}
+    <div class="form-container">
+    {{ form_start(form) }}
+    <button class="button">Ajouter</button>
+    {{ form_end(form)}}
 
-
-
-<button class="button">Ajouter</button>
-{# <input type="submit"> #}
-{{ form_end(form)}}
-
-</div>
+    </div>
 
 </main>
 

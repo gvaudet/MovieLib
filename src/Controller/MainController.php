@@ -20,10 +20,9 @@ class MainController extends AbstractController
 
     public function index(PeopleRepository $PeopleRepository): Response
     {
-        $films = $this->FilmRepository->findBy([]);
-        $people =$PeopleRepository->findBy([]);
+        $films = $this->FilmRepository->findAll();
+        $people =$PeopleRepository->findAll();
         // dd($people);
-
         return $this->render('main/index.html.twig', [
             'controller_name' => 'MainController',
             'films' => $films,

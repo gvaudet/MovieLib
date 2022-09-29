@@ -4,10 +4,14 @@
 
 {% block body %}
 <main>
-    <section>
-        <div class="container">
+    <section class="container">
+        <div class=" index">
+        {# Méthode temporaire car avec plus de 5000 films temps de chargement trop important (à changer) #}
             <p>Nombre de films : {{ films| length }}</p>
             <p>Nombre d'intervenants : {{ people| length }}</p>
+            {% for film in films %}
+            {# <p>Durée total de tout les films  : {{ film.duration|date('h:i') }}</p> #}
+            {% endfor %}
         </div>
     </section>
 </main>
