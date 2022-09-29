@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PeopleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -25,6 +27,18 @@ class People
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
+
+    #[ORM\OneToMany(mappedBy: 'people', targetEntity: Attendees::class)]
+    private Collection $attendees;
+
+    #[ORM\OneToMany(mappedBy: 'people', targetEntity: PeopleJobs::class)]
+    private Collection $peopleJobs;
+
+    public function __construct()
+    {
+        $this->attendees = new ArrayCollection();
+        $this->peopleJobs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -75,6 +89,66 @@ class People
     public function setPicture(?string $picture): self
     {
         $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Attendees>
+     */
+    public function getAttendees(): Collection
+    {
+        return $this->attendees;
+    }
+
+    public function addAttendee(Attendees $attendee): self
+    {
+        if (!$this->attendees->contains($attendee)) {
+            $this->attendees->add($attendee);
+            $attendee->setPeople($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAttendee(Attendees $attendee): self
+    {
+        if ($this->attendees->removeElement($attendee)) {
+            // set the owning side to null (unless already changed)
+            if ($attendee->getPeople() === $this) {
+                $attendee->setPeople(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PeopleJobs>
+     */
+    public function getPeopleJobs(): Collection
+    {
+        return $this->peopleJobs;
+    }
+
+    public function addPeopleJob(PeopleJobs $peopleJob): self
+    {
+        if (!$this->peopleJobs->contains($peopleJob)) {
+            $this->peopleJobs->add($peopleJob);
+            $peopleJob->setPeople($this);
+        }
+
+        return $this;
+    }
+
+    public function removePeopleJob(PeopleJobs $peopleJob): self
+    {
+        if ($this->peopleJobs->removeElement($peopleJob)) {
+            // set the owning side to null (unless already changed)
+            if ($peopleJob->getPeople() === $this) {
+                $peopleJob->setPeople(null);
+            }
+        }
 
         return $this;
     }

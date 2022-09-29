@@ -3,6 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\FilmRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -14,6 +17,7 @@ class Film
     #[ORM\Column]
     private ?int $id = null;
 
+    // length = 255 because the longest film title is 169 characters
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
@@ -22,6 +26,18 @@ class Film
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $poster = null;
+
+    #[ORM\OneToMany(mappedBy: 'film', targetEntity: Attendees::class)]
+    private Collection $attendees;
+
+    #[ORM\OneToMany(mappedBy: 'film', targetEntity: FilmCategory::class)]
+    private Collection $filmCategories;
+
+    public function __construct()
+    {
+        $this->attendees = new ArrayCollection();
+        $this->filmCategories = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -60,6 +76,66 @@ class Film
     public function setPoster(?string $poster): self
     {
         $this->poster = $poster;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Attendees>
+     */
+    public function getAttendees(): Collection
+    {
+        return $this->attendees;
+    }
+
+    public function addAttendee(Attendees $attendee): self
+    {
+        if (!$this->attendees->contains($attendee)) {
+            $this->attendees->add($attendee);
+            $attendee->setFilm($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAttendee(Attendees $attendee): self
+    {
+        if ($this->attendees->removeElement($attendee)) {
+            // set the owning side to null (unless already changed)
+            if ($attendee->getFilm() === $this) {
+                $attendee->setFilm(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, FilmCategory>
+     */
+    public function getFilmCategories(): Collection
+    {
+        return $this->filmCategories;
+    }
+
+    public function addFilmCategory(FilmCategory $filmCategory): self
+    {
+        if (!$this->filmCategories->contains($filmCategory)) {
+            $this->filmCategories->add($filmCategory);
+            $filmCategory->setFilm($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFilmCategory(FilmCategory $filmCategory): self
+    {
+        if ($this->filmCategories->removeElement($filmCategory)) {
+            // set the owning side to null (unless already changed)
+            if ($filmCategory->getFilm() === $this) {
+                $filmCategory->setFilm(null);
+            }
+        }
 
         return $this;
     }
