@@ -27,6 +27,9 @@ class Film
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $poster = null;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $description = null;
+
     #[ORM\OneToMany(mappedBy: 'film', targetEntity: Attendees::class)]
     private Collection $attendees;
 
@@ -76,6 +79,18 @@ class Film
     public function setPoster(?string $poster): self
     {
         $this->poster = $poster;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }
@@ -139,4 +154,5 @@ class Film
 
         return $this;
     }
+
 }

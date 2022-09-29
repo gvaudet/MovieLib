@@ -28,6 +28,9 @@ class People
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $Biography = null;
+
     #[ORM\OneToMany(mappedBy: 'people', targetEntity: Attendees::class)]
     private Collection $attendees;
 
@@ -89,6 +92,18 @@ class People
     public function setPicture(?string $picture): self
     {
         $this->picture = $picture;
+
+        return $this;
+    }
+
+    public function getBiography(): ?string
+    {
+        return $this->Biography;
+    }
+
+    public function setBiography(?string $Biography): self
+    {
+        $this->Biography = $Biography;
 
         return $this;
     }
