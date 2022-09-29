@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\People;
-use App\Form\AddPeopleType;
+use App\Form\PeopleType;
 use App\Repository\PeopleRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,25 +37,25 @@ class PeopleController extends AbstractController
         ]);
     }
 
-    // #[Route('/people', name: 'form')]
-    // public function form(Request $request): Response
-    // {
-    //     $people = new People(); 
-    //     $form = $this->createForm(AddPeopleType::class);
+    #[Route('/nouveau', name: 'form')]
+    public function form(Request $request, PeopleRepository $peopleRepository): Response
+    {
+        $people = new People(); 
+        $form = $this->createForm(PeopleType::class, $people);
 
-    //     $form->handleRequest($request);
-    //     if($form->isSubmitted() && $form->isValid){
-    //         $this->peopleRepository->add($people, true);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $peopleRepository->save($people, true);
 
-    //         $this->addFlash('success', ' Élément bien ajouté à la BDD');
+            $this->addFlash('success', ' Élément bien ajouté à la BDD');
 
-    //         return $this->redirectToRoute('people_single', [
-    //             'id' => $people->getId(),
-    //         ]);
-    //     }
+            return $this->redirectToRoute('people_single', [
+                'id' => $people->getId(),
+            ]);
+        }
         
-    //     return $this->render('people/index.html.twig', [
-    //         'controller_name' => 'PeopleController',
-    //     ]);
-    // }
+        return $this->render('people/form.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
 }
