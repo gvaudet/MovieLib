@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FilmController!{% endblock %}
+
+{% block body %}
+<main>
+<div class="container" id="list-container">
+    {% for film in films %}
+        <div class="card">
+			<div class="peopleName">
+				<h2>{{film.title}}</h2>
+			</div>
+
+			<img src="{{ asset('images/films/' ~ film.poster) }}" alt="">
+            <p>{{film.description}}</p>
+            
+			<a href="{{ path('film_single', {id : film.id}) }}">Voir fiche</a>
+		</div>
+    {% endfor %}
+</div>
+</main>
+{% endblock %}

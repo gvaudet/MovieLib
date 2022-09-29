@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SINGLEPEOPLE PAGE!{% endblock %}
+
+
+{% block body %}
+<div class="container" id="single">
+    <h1>{{single.title}}</h1>
+    <img src="{{ asset('images/films/' ~ single.poster) }}" alt="">
+    <p>{{single.description}}</p>
+</div>
+{% endblock %}
