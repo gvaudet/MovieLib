@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SINGLEPEOPLE PAGE!{% endblock %}
+
+
+{% block body %}
+<div class="container" id="single">
+    <h1>{{single.lastname}} {{single.firstname}}</h1>
+    <img src="{{ asset('images/people/' ~ single.picture) }}" alt="">
+    <div>né le :{{single.birthdate|date('d/m/Y')}}</div>
+    <p>{{single.biography}}</p>
+
+</div>
+{% endblock %}

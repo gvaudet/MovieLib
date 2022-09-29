@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PeopleController!{% endblock %}
+
+
+{% block body %}
+<div class="container" id="list-container">
+    {% for singlepeople in people %}
+        <div class="card">
+			<div class="peopleName">
+				<h2>{{singlepeople.lastname}} {{singlepeople.firstname}}</h2>
+			</div>
+
+			<img src="{{ asset('images/people/' ~ singlepeople.picture) }}" alt="">
+
+			<div>né le :{{singlepeople.birthdate|date('d/m/Y')}}</div>
+
+
+			<a href="{{ path('people_single', {id : singlepeople.id}) }}">Voir fiche</a>
+		</div>
+    {% endfor %}
+</div>
+{% endblock %}

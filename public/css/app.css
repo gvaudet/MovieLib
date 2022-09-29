@@ -74,5 +74,30 @@ text-align: center;
     margin-top: 20px;
 }
 
-/* -------------- components / footer ---------------*/
+/* -------------- peopleList ---------------*/
+
+#list-container{
+    flex-wrap: wrap;
+}
+
+.card{
+    height: 350px;
+    width: 350px;
+    box-shadow: 10px 10px 4px -6px #000000;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.card img{
+    max-height: 200px;
+    max-width: 150px;
+    margin-top: 15px;
+}
+
+/* -------------- singlePeoplePage ---------------*/
+
+#single{
+    flex-direction: column;
+}
 
