@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\TypeRepository;
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: TypeRepository::class)]
-class Type
+#[ORM\Entity(repositoryClass: CategoryRepository::class)]
+class Category
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -14,21 +14,21 @@ class Type
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
-    private ?string $label = null;
+    private ?string $name = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getLabel(): ?string
+    public function getName(): ?string
     {
-        return $this->label;
+        return $this->name;
     }
 
-    public function setLabel(string $label): self
+    public function setName(string $name): self
     {
-        $this->label = $label;
+        $this->name = $name;
 
         return $this;
     }
